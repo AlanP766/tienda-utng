@@ -1,5 +1,9 @@
 package utng.gtid232.apm.modelo;
 
+/**
+ * Entidad que representa la estructura de un Producto.
+ * @author Alan Palomino
+ */
 public class Producto {
     private int id;
     private String nombre;
