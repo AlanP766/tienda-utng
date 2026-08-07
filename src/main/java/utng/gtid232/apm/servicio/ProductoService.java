@@ -5,6 +5,10 @@ import utng.gtid232.apm.dao.ProductoDAOImpl;
 import utng.gtid232.apm.modelo.Producto;
 import java.util.List;
 
+/**
+ * Servicio que contiene la lógica de negocio para la gestión de productos.
+ * @author Alan Palomino
+ */
 public class ProductoService {
 
     private ProductoDAO productoDAO = (ProductoDAO) new ProductoDAOImpl();
