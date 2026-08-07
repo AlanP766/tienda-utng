@@ -3,6 +3,12 @@ package utng.gtid232.apm;
 import utng.gtid232.apm.modelo.Producto;
 import utng.gtid232.apm.servicio.ProductoService;
 
+/**
+ * Clase principal que sirve como punto de entrada de la aplicación.
+ * Ejecuta la inicialización del sistema y las pruebas del CRUD.
+ * 
+ * @author Alan Palomino
+ */
 public class Main {
   public static void main(String[] args) {
         System.out.println("=== SISTEMA TIENDA UTNG ===");
