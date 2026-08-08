@@ -79,7 +79,7 @@ public class Producto {
     }
 
     // Método para la Tarea 3
-    // Implementación básica del descuento (GREEN)
+    // Implementación básica del descuento (green y refactor)
     public void aplicarDescuento(double porcentaje) {
         if (porcentaje < 0 || porcentaje > 100) {
             throw new IllegalArgumentException("El porcentaje de descuento debe estar entre 0 y 100");
