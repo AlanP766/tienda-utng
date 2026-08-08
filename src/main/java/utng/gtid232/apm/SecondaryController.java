@@ -24,7 +24,7 @@ public class SecondaryController {
     @FXML private TableColumn<Producto, Double> colPrecio;
 
     // 2. Conexión con tu backend (Base de Datos a través de ProductoService)
-    private ProductoService servicio = new ProductoService();
+    private ProductoService servicio = new ProductoService(null);
     private ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     /**

@@ -13,7 +13,7 @@ public class Main {
   public static void main(String[] args) {
         System.out.println("=== SISTEMA TIENDA UTNG ===");
         
-        ProductoService servicio = new ProductoService();
+        ProductoService servicio = new ProductoService(null);
         
         // Demo
         servicio.registrarProducto(1, "Teclado Mecánico", 750.00);
