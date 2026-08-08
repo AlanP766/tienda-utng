@@ -22,12 +22,7 @@ public class ProductoServiceTest {
     void registrar_productoValido_retornaUno() {
         Producto p = new Producto("P002", "Cuaderno", 25.0, 5);
         int resultado = productoService.registrar(p);
-        assertEquals(1, resultado, "El registro exitoso de un producto válido debe retornar 1");
-    }
-
-    private void assertEquals(int i, int resultado, String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assertEquals'");
+        assertEquals(1, resultado, "El registro exitoso de un producto valido debe retornar 1");
     }
 
     @Test
@@ -45,8 +40,8 @@ public class ProductoServiceTest {
         boolean exito = productoService.vender("P003", 5);
 
         assertAll("Verificación de venta con stock suficiente",
-            () -> assertTrue(exito, "La venta debe realizarse con éxito"),
-            () -> assertEquals(15, daoMemoria.findByCodigo("P003").get().getStock(), "El stock debió reducirse de 20 a 15")
+            () -> assertTrue(exito, "La venta debe realizarse con exito"),
+            () -> assertEquals(15, daoMemoria.findByCodigo("P003").get().getStock(), "El stock debio reducirse de 20 a 15")
         );
     }
 
@@ -57,6 +52,6 @@ public class ProductoServiceTest {
 
         assertThrows(IllegalStateException.class, () -> {
             productoService.vender("P004", 10);
-        }, "Intentar vender más unidades del stock disponible debe lanzar IllegalStateException");
+        }, "Intentar vender mas unidades del stock disponible debe lanzar IllegalStateException");
     }
 }

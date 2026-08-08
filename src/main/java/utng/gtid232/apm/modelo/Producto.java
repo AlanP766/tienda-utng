@@ -1,61 +1,88 @@
 package utng.gtid232.apm.modelo;
 
-/**
- * Entidad que representa la estructura de un Producto.
- * @author Alan Palomino
- */
 public class Producto {
+
     private int id;
+    private String codigo;
     private String nombre;
     private double precio;
+    private int stock;
+    private boolean activo;
 
-    public Producto(int id, String nombre, double precio) {
+    public Producto() {
+        this.activo = true;
+    }
+
+    public Producto(String codigo, String nombre, double precio, int stock) {
+        setCodigo(codigo);
+        setNombre(nombre);
+        setPrecio(precio);
+        setStock(stock);
+        this.activo = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del producto no puede ser nulo o vacio");
+        }
         this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        if (precio < 0) {
+            throw new IllegalArgumentException("El precio del producto no puede ser negativo");
+        }
         this.precio = precio;
     }
 
-    public Producto(String string, String string2, double d, int i) {
-        //TODO Auto-generated constructor stub
+    public int getStock() {
+        return stock;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
-
-    @Override
-    public String toString() {
-        return "Producto{" + "id=" + id + ", nombre='" + nombre + '\'' + ", precio=" + precio + '}';
+    public void setStock(int stock) {
+        if (stock < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
+        this.stock = stock;
     }
 
-    public Object getCodigo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCodigo'");
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setStock(int nuevoStock) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStock'");
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public Object isActivo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isActivo'");
-    }
-
-    public Integer getStock() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStock'");
-    }
-
-    public void aplicarDescuento(double d) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'aplicarDescuento'");
+    // Método para la Tarea 3
+    public void aplicarDescuento(double porcentaje) {
+        if (porcentaje < 0 || porcentaje > 100) {
+            throw new IllegalArgumentException("El porcentaje de descuento debe estar entre 0 y 100");
+        }
+        this.precio -= this.precio * (porcentaje / 100.0);
     }
 }
-

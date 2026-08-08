@@ -2,6 +2,7 @@ package utng.gtid232.apm.modelo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductoTest {
@@ -16,10 +17,10 @@ public class ProductoTest {
     @Test
     void constructor_datosValidos_creaProductoCorrectamente() {
         assertAll("Verificar atributos del producto",
-            () -> assertEquals("P001", producto.getCodigo(), "El código debe coincidir"),
-            () -> assertEquals("Lapiz", producto.getNombre(), "El nombre debe coincidir"),
-            () -> assertEquals(15.0, producto.getPrecio(), "El precio debe coincidir"),
-            () -> assertEquals(10, producto.getStock(), "El stock debe coincidir")
+            () -> assertEquals("P001", producto.getCodigo()),
+            () -> assertEquals("Lapiz", producto.getNombre()),
+            () -> assertEquals(15.0, producto.getPrecio()),
+            () -> assertEquals(10, producto.getStock())
         );
     }
 
@@ -27,32 +28,33 @@ public class ProductoTest {
     void setPrecio_precioNegativo_lanzaExcepcion() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             producto.setPrecio(-5.0);
-        }, "Debe lanzar IllegalArgumentException cuando el precio es negativo");
-        
-        assertTrue(exception.getMessage().contains("precio"), "El mensaje debe hacer referencia al precio");
+        });
+        assertTrue(exception.getMessage().contains("precio"));
     }
 
     @Test
     void setNombre_nombreNulo_lanzaExcepcion() {
         assertThrows(IllegalArgumentException.class, () -> {
             producto.setNombre(null);
-        }, "Debe lanzar IllegalArgumentException si el nombre es nulo");
+        });
     }
 
     @Test
     void isActivo_porDefecto_retornaTrue() {
-        assertTrue(producto.isActivo(), "El producto debe estar activo por defecto al crearse");
+        assertTrue(producto.isActivo());
     }
 
-    private void assertTrue(Object activo, String message) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assertTrue'");
+    // --- METODOS DE LA TAREA 3 (TDD) ---
+    @Test
+    void aplicarDescuento_porcentajeValido_reducePrecioCorrectamente() {
+        producto.aplicarDescuento(10.0);
+        assertEquals(13.5, producto.getPrecio(), 0.001);
     }
 
     @Test
-void aplicarDescuento_porcentajeValido_reducePrecioCorrectamente() {
-    // Si el precio original es 15.0 y aplicamos 10% de descuento, debe quedar en 13.5
-    producto.aplicarDescuento(10.0);
-    assertEquals(13.5, producto.getPrecio(), 0.001, "El precio con 10% de descuento debe ser 13.5");
-}
+    void aplicarDescuento_porcentajeInvalido_lanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            producto.aplicarDescuento(150.0);
+        });
+    }
 }
