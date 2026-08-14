@@ -60,5 +60,11 @@ private final List<Producto> almacen = new ArrayList<>();
     public boolean delete(String codigo) {
         return almacen.removeIf(p -> p.getCodigo() != null && ((String) p.getCodigo()).equalsIgnoreCase(codigo));
     }
+
+    @Override
+    public void actualizar(Producto producto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    }
 }
 
