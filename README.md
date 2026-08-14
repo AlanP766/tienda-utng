@@ -27,3 +27,11 @@ CREATE TABLE productos (
     nombre VARCHAR(100) NOT NULL,
     precio DOUBLE NOT NULL
 );
+
+## Excepciones del Dominio
+
+El sistema utiliza las siguientes excepciones personalizadas para el control de reglas de negocio:
+
+* **`StockInsuficienteException`**: Se lanza en `ProductoService.vender()` cuando el stock disponible es menor a la cantidad requerida. Captura `codigoProducto`, `stockActual` y `cantidadSolicitada`.
+* **`ProductoNoEncontradoException`**: Se lanza al intentar consultar o vender un código de producto inexistente. Captura el `codigo` buscado.
+* **`PrecioInvalidoException`**: Se lanza al intentar registrar un producto con precio menor a 0. Captura el `precio` inválido.**

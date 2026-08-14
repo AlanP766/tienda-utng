@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Stub en memoria de ProductoDAO para ejecución de pruebas unitarias sin BD.
+ * Stub en memoria de ProductoDAO para ejecucion de pruebas unitarias y ejecucion local sin BD.
  */
 public class ProductoDAOMemoria implements ProductoDAO {
 
@@ -26,12 +26,30 @@ public class ProductoDAOMemoria implements ProductoDAO {
 
     @Override
     public void guardar(Producto producto) {
-        insert(producto);
+        // Guarda o actualiza si ya existe en la lista
+        Optional<Producto> existente = findByCodigo(producto.getCodigo());
+        if (existente.isPresent()) {
+            actualizar(producto);
+        } else {
+            insert(producto);
+        }
+    }
+
+    @Override
+    public void actualizar(Producto producto) {
+        if (producto == null || producto.getCodigo() == null) {
+            return;
+        }
+        for (int i = 0; i < almacen.size(); i++) {
+            if (almacen.get(i).getCodigo().equalsIgnoreCase(producto.getCodigo())) {
+                almacen.set(i, producto);
+                return;
+            }
+        }
     }
 
     @Override
     public List<Producto> findAll() {
-        // Retorna una copia defensiva para proteger el estado interno
         return new ArrayList<>(almacen);
     }
 
@@ -42,8 +60,11 @@ public class ProductoDAOMemoria implements ProductoDAO {
 
     @Override
     public Optional<Producto> findByCodigo(String codigo) {
+        if (codigo == null) {
+            return Optional.empty();
+        }
         return almacen.stream()
-                .filter(p -> p.getCodigo() != null && ((String) p.getCodigo()).equalsIgnoreCase(codigo))
+                .filter(p -> p.getCodigo() != null && p.getCodigo().equalsIgnoreCase(codigo))
                 .findFirst();
     }
 
@@ -59,6 +80,9 @@ public class ProductoDAOMemoria implements ProductoDAO {
 
     @Override
     public boolean delete(String codigo) {
-        return almacen.removeIf(p -> p.getCodigo() != null && ((String) p.getCodigo()).equalsIgnoreCase(codigo));
+        if (codigo == null) {
+            return false;
+        }
+        return almacen.removeIf(p -> p.getCodigo() != null && p.getCodigo().equalsIgnoreCase(codigo));
     }
 }
