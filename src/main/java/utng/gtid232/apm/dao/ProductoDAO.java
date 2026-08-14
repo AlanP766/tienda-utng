@@ -12,5 +12,6 @@ public interface ProductoDAO {
     boolean updateStock(String codigo, int nuevoStock);
     boolean delete(String codigo);
     List<Producto> findAll();
+    void actualizar(Producto producto);
     
 }
